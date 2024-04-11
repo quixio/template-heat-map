@@ -1,0 +1,11 @@
+name: clickstreams-web-sockets
+language: Python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: Output topic
+    defaultValue: heatmap
+    required: true
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py

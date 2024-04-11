@@ -1,0 +1,5 @@
+name: Heatmap frontend
+language: nodejs
+variables: []
+dockerfile: src/build/dockerfile
+defaultFile: src/build/dockerfile

@@ -1,0 +1,137 @@
+# Quix Project Descriptor
+# This file describes the data pipeline and configuration of resources of a Quix Project.
+
+metadata:
+  version: 1.0
+
+# This section describes the Deployments of the data pipeline
+deployments:
+  - name: Clickstreams Web Sockets
+    application: clickstreams-web-sockets
+    deploymentType: Service
+    version: latest
+    resources:
+      cpu: 500
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: clickstream
+    desiredStatus: Running
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: Output topic
+        required: true
+        value: clickstream
+  - name: Demo frontend
+    application: demo-webshop-frontend
+    deploymentType: Service
+    version: latest
+    resources:
+      cpu: 500
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: webshop
+    desiredStatus: Running
+    variables: &o0 []
+  - name: Heatmap aggregator
+    application: heatmap-aggregator
+    deploymentType: Service
+    version: latest
+    resources:
+      cpu: 1000
+      memory: 500
+      replicas: 1
+    state:
+      enabled: true
+      size: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: clickstream-group-by-page
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        required: false
+        value: heatmap
+  - name: Group By
+    application: group-by
+    deploymentType: Service
+    version: latest
+    resources:
+      cpu: 500
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: clickstream
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        required: false
+        value: clickstream-group-by-page
+  - name: Heatmap Web Sockets
+    application: heatmap-web-sockets
+    deploymentType: Service
+    version: latest
+    resources:
+      cpu: 1000
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: heatmap-ws
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Output topic
+        required: true
+        value: heatmap
+  - name: Heatmap frontend
+    application: heatmap-frontend
+    deploymentType: Service
+    version: latest
+    resources:
+      cpu: 500
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: heatmap
+    desiredStatus: Running
+    variables: *o0
+
+# This section describes the Topics of the data pipeline
+topics:
+  - name: clickstream-group-by-page
+    persisted: false
+    configuration:
+      partitions: 2
+      replicationFactor: 2
+      retentionInMinutes: 10080
+      retentionInBytes: 52428800
+  - name: clickstream
+    persisted: false
+    configuration:
+      partitions: 2
+      replicationFactor: 2
+      retentionInMinutes: 10080
+      retentionInBytes: 52428800
+  - name: heatmap
+    persisted: false
+    configuration:
+      partitions: 2
+      replicationFactor: 2
+      retentionInMinutes: 10080
+      retentionInBytes: 52428800
