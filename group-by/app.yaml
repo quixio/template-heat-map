@@ -1,0 +1,16 @@
+name: group-by
+language: Python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: Name of the input topic to listen to.
+    defaultValue: clickstream
+    required: false
+  - name: output
+    inputType: OutputTopic
+    description: Name of the output topic to write to.
+    defaultValue: clickstream-group-by-page
+    required: false
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py

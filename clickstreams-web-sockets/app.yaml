@@ -1,0 +1,11 @@
+name: clickstreams-web-sockets
+language: Python
+variables:
+  - name: output
+    inputType: OutputTopic
+    description: Output topic
+    defaultValue: clickstream
+    required: true
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
