@@ -1,6 +1,6 @@
 # Clickstream Analytics Template
 
-This is a template application which displays realtime data analytics of customer activity on a website. The pink boxes show which products have the most attention at that point.
+This is a template application which displays realtime data analytics of customer activity on a website. The pink boxes show which products have the most attention in realtime.
 
 ![Alt text](heat_map_image.png)
 
