@@ -1,7 +1,7 @@
 import os
 from quixstreams import Application
 from dotenv import load_dotenv
-
+ 
 load_dotenv()
 
 app = Application.Quix("group-by-v1", auto_offset_reset="earliest")
