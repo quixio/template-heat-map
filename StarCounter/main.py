@@ -28,13 +28,10 @@ def stars(row):
         return
         # Check rate limit
         response = requests.get('https://api.github.com/rate_limit', headers=headers)
-        print(response.json())
         remaining = response.json()['rate']['remaining']
+        print(response.json())
         print(f"Remaining calls on rate limit = {remaining}")
         if remaining < 10:  # If less than 10 requests remaining, sleep for a while
-            print("Rate limit approaching, sleeping for a minute...")
-            time.sleep(60)  # Sleep for 60 seconds       
-        if remaining < 1:  # If less than 10 requests remaining, sleep for a while
             print("Rate limit approaching, sleeping for an hour...")
             time.sleep(60*60)  # Sleep for 60 seconds   
 
