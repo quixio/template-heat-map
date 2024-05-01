@@ -128,7 +128,7 @@ deployments:
         inputType: OutputTopic
         description: This is the output topic for hello world data
         required: true
-        value: hello-world-source
+        value: kafka-python-deps
 
 # This section describes the Topics of the data pipeline
 topics:
@@ -159,4 +159,11 @@ topics:
       partitions: 1
       replicationFactor: 2
       retentionInMinutes: -1
+      retentionInBytes: 52428800
+  - name: kafka-python-deps
+    persisted: false
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: 1440
       retentionInBytes: 52428800
