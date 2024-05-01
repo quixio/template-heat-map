@@ -20,6 +20,9 @@ sdf = app.dataframe(input_topic)
 def stars(row):
     
     try:
+        
+
+
         url = f"https://api.github.com/repos{row['href']}"
         response = requests.get(url)
         data = response.json()
