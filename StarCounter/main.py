@@ -21,11 +21,22 @@ token = os.environ['gh_token']
 def stars(row):
     
     try:
-        
+
+        headers = {'Authorization': f'token {token}'}
+
+        # Check rate limit
+        response = requests.get('https://api.github.com/rate_limit', headers=headers)
+        remaining = response.json()['rate']['remaining']
+        if remaining < 10:  # If less than 10 requests remaining, sleep for a while
+            print("Rate limit approaching, sleeping for a minute...")
+            time.sleep(60)  # Sleep for 60 seconds       
+        if remaining < 1:  # If less than 10 requests remaining, sleep for a while
+            print("Rate limit approaching, sleeping for an hour...")
+            time.sleep(60*60)  # Sleep for 60 seconds   
 
 
         url = f"https://api.github.com/repos{row['href']}"
-        headers = {'Authorization': f'token {token}'}
+        
         response = requests.get(url, headers=headers)
         data = response.json()
         stars = data['stargazers_count']
