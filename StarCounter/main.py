@@ -25,6 +25,7 @@ def stars(row):
 
         headers = {'Authorization': f'token {token}'}
         print(headers)
+        return
         # Check rate limit
         response = requests.get('https://api.github.com/rate_limit', headers=headers)
         print(response.json())
