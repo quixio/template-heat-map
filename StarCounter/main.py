@@ -21,8 +21,11 @@ def stars(row):
     url = f"https://api.github.com/repos{row['href']}"
     response = requests.get(url)
     data = response.json()
-    stars = data['stargazers_count']
-    print(f"{row['href']} has {stars}")
+    try:
+        stars = data['stargazers_count']
+        print(f"{row['href']} has {stars}")
+    except e as Exception:
+        print(e)
 
 sdf = sdf.update(stars)
 
