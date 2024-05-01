@@ -26,7 +26,7 @@ def stars(row):
         stars = data['stargazers_count']
         print(f"{row['href']} has {stars}")
     except Exception as e:
-        print(f'Error: {e}')
+        print(f'Error: {e} from {data}')
 
 sdf = sdf.update(stars)
 
