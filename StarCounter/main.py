@@ -22,7 +22,7 @@ def stars(row):
     response = requests.get(url)
     data = response.json()
     stars = data['stargazers_count']
-    print(f'{row['href']} has {stars}')
+    print(f"{row['href']} has {stars}")
 
 sdf = sdf.update(stars)
 
