@@ -165,7 +165,7 @@ topics:
     configuration:
       partitions: 1
       replicationFactor: 2
-      retentionInMinutes: 1440
+      retentionInMinutes: -1
       retentionInBytes: 52428800
   - name: stars
     persisted: false
