@@ -17,6 +17,7 @@ sdf = app.dataframe(input_topic)
 # see docs for what you can do
 # https://quix.io/docs/get-started/quixtour/process-threshold.html
 
+token = os.environ['gh_token']
 def stars(row):
     
     try:
@@ -24,7 +25,8 @@ def stars(row):
 
 
         url = f"https://api.github.com/repos{row['href']}"
-        response = requests.get(url)
+        headers = {'Authorization': f'token {token}'}
+        response = requests.get(url, headers=headers)
         data = response.json()
         stars = data['stargazers_count']
         print(f"{row['href']} has {stars}")
