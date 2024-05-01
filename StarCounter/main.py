@@ -35,7 +35,6 @@ def stars(row):
             print("Rate limit approaching, sleeping for an hour...")
             time.sleep(60*60)  # Sleep for 60 seconds   
 
-
         url = f"https://api.github.com/repos{row['href']}"
         
         response = requests.get(url, headers=headers)
