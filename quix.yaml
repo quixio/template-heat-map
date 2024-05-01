@@ -36,7 +36,7 @@ deployments:
       enabled: true
       urlPrefix: webshop
     desiredStatus: Running
-    variables: &o0 []
+    variables: []
   - name: Heatmap aggregator
     application: heatmap-aggregator
     deploymentType: Service
@@ -110,7 +110,25 @@ deployments:
       enabled: true
       urlPrefix: heatmap
     desiredStatus: Running
-    variables: *o0
+    variables: []
+  - name: Flask Web Gateway
+    application: Flask Web Gateway
+    deploymentType: Service
+    version: latest
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: gateway
+    desiredStatus: Running
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic for hello world data
+        required: true
+        value: hello-world-source
 
 # This section describes the Topics of the data pipeline
 topics:
