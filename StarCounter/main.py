@@ -1,4 +1,5 @@
 import os
+import requests
 from quixstreams import Application
 
 # for local dev, load env vars from a .env file
@@ -16,9 +17,20 @@ sdf = app.dataframe(input_topic)
 # see docs for what you can do
 # https://quix.io/docs/get-started/quixtour/process-threshold.html
 
-sdf = sdf.update(lambda row: print(row))
+def stars(row):
 
-sdf = sdf.to_topic(output_topic)
+    def get_stars(owner, repo):
+        url = f"https://api.github.com/repos/{row['']}"
+        response = requests.get(url)
+        data = response.json()
+        return data['stargazers_count']
+
+    stars = get_stars('dpkp', 'kafka-python')
+    print(stars)
+
+sdf = sdf.update(stars)
+
+# sdf = sdf.to_topic(output_topic)
 
 if __name__ == "__main__":
     app.run(sdf)
